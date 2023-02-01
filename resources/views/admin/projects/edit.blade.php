@@ -47,6 +47,25 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="mb-3">
+            <div class="mb-2">Tecnologie</div>
+            @foreach ($technologies as $technology)
+                <div class="form-check form-check-inline">
+                    {{-- In fase di modifica ottengo 2 tipi di dati diversi, un array in PHP plain nel caso dell'old e una collection di oggetti quando le "technologies" sono associate ai progetti --}}
+                    @if( $errors->any() )
+                        {{-- in caso di validazione fallita: --}}
+                        <input class="form-check-input" type="checkbox" id="{{ $technology->slug }}" name="technologies[]" value="{{ $technology->id }}" {{ in_array( $technology->id, old('technologies', []) ) ? 'checked' : '' }}>
+                    @else
+                        {{-- per avere già flaggate le eventuali "technologies" già associate: --}}
+                        <input class="form-check-input" type="checkbox" id="{{ $technology->slug }}" name="technologies[]" value="{{ $technology->id }}" {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                    @endif
+                        <label class="form-check-label" for="{{ $technology->slug }}">{{ $technology->name }}</label>
+                </div>
+            @endforeach
+            @error('technologies')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-primary">Modifica</button>
         <button type="reset" class="btn btn-secondary">Pulisci i campi</button>
         <a href="{{ route('admin.projects.index') }}" class="btn btn-light">Annulla</a>
