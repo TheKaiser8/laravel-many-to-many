@@ -48,6 +48,18 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="mb-3">
+            <div class="mb-2">Tecnologie</div>
+            @foreach ($technologies as $technology)
+            <div class="form-check form-check-inline">
+                <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox" id="{{ $technology->slug }}" name="technologies[]" value="{{ $technology->id }}" {{ in_array( $technology->id, old('technologies', []) ) ? 'checked' : ''}}>
+                <label class="form-check-label" for="{{ $technology->slug }}">{{ $technology->name }}</label>
+            </div>
+            @endforeach
+            @error('technologies')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-primary">Crea</button>
         <button type="reset" class="btn btn-secondary">Pulisci i campi</button>
         <a href="{{ route('admin.projects.index') }}" class="btn btn-light">Annulla</a>

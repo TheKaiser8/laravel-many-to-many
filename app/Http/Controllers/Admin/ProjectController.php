@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -32,8 +33,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -54,6 +56,11 @@ class ProjectController extends Controller
             $new_project->picture = Storage::disk('public')->put('uploads', $data['picture']);
         }
         $new_project->save();
+
+        // controllo che permette di creare projects senza technologies
+        if (isset($data['technologies'])) {
+            $new_project->technologies()->sync($data['technologies']); // permette di aggiungere ed eliminare record nella tabella pivot
+        }
 
         return redirect()->route('admin.projects.index')->with('message', "Il progetto $new_project->title è stato creato con successo");
     }

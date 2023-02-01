@@ -25,6 +25,17 @@
                     Nessuna tipologia
                 @endif
             </div>
+            @if( $project->technologies->isNotEmpty()) <!-- metodo per controllare se una collection NON è vuota -->
+                <div class="mb-3">
+                    Tecnologie:
+                    @foreach ($project->technologies as $technology)
+                        <a href="#" class="text-decoration-none">
+                            <span class="badge text-bg-primary ms-1">{{ $technology->name }}</span>
+                        </a>
+                    @endforeach
+                </div>
+            @endif
+
             <p class="card-text">{{ $project->description }}</p>
             <div>Cliente:
                 <strong>{{ $project->customer }}</strong>
