@@ -7,7 +7,7 @@
 @section('content')
     <h2 class="text-decoration-underline my-3">Lista tipologie</h2>
     @include('partials.message')
-    <a href="{{ route('admin.types.create') }}" class="btn btn-light my-3"><i class="fa-regular fa-square-plus me-2"></i>Aggiungi tipologie</a>
+    <a href="{{ route('admin.types.create') }}" class="btn btn-light my-3"><i class="fa-regular fa-square-plus me-2"></i>Aggiungi tipologia</a>
     <table class="table table-striped">
         <thead>
             <tr>

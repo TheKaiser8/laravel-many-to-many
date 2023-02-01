@@ -40,7 +40,7 @@
                             <h1 class="modal-title fs-5" id="modalDeleteLabel">Cancellazione elemento</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">Confermi di voler cancellare definitivamente la tipologia "<strong>{{ $technology->name }}</strong>"?</div>
+                        <div class="modal-body">Confermi di voler cancellare definitivamente la tecnologia "<strong>{{ $technology->name }}</strong>"?</div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                             <form action="{{ route('admin.technologies.destroy', $technology)}}" method="POST" class="d-inline-block">
