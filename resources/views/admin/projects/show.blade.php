@@ -29,7 +29,7 @@
                 <div class="mb-3">
                     Tecnologie:
                     @foreach ($project->technologies as $technology)
-                        <a href="#" class="text-decoration-none">
+                        <a href="{{ route('admin.technologies.show', $technology) }}" class="text-decoration-none">
                             <span class="badge text-bg-primary ms-1">{{ $technology->name }}</span>
                         </a>
                     @endforeach
